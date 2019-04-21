@@ -1,0 +1,17 @@
+.drop-zone{
+  min-height: 100px;
+  max-width: 400px;
+  border: 1px solid grey;
+}
+.focused {
+  border: 1px solid blue;
+}
+.pendinginfo {
+  background-color: red;
+}
+.completedinfo {
+  background-color:greenyellow;
+}
+tr, td, th {
+  border: 1px solid black;
+}

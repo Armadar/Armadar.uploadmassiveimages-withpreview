@@ -1,0 +1,50 @@
+<h4>Welcome to {{ title }}!</h4>
+<mat-card>
+  <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()">
+    <mat-card-content>
+      <mat-form-field class="form-field">
+        <mat-label>Select Document Type</mat-label>
+        <mat-select formControlName="type" required>
+          <mat-option value="Passport">Passport</mat-option>
+          <mat-option value="Driving_license">Driving License</mat-option>
+          <mat-option value="PAN">PAN</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <input formControlName="document" type="file" ng2FileSelect accept="image/png,image/jpeg,image/jpg" [uploader]="uploader" multiple /><br />
+      <br>
+      <div class="drop-zone">
+        <div ng2FileDrop [uploader]="uploader" class="drop-zone">
+          Drag and drop files to upload
+        </div>
+      </div>
+      <div id="container">
+
+        <div *ngFor="let item of uploader.queue; let i = index" style="height:300px;display:inline-block;margin-right:10px">
+          <div>
+              Index: {{i+1}}
+            <img src="" imgPreview [image]="item?._file" class="media-object" height="200" />
+          </div>
+          <div class="text-center"  id={{i+1}}  >
+            {{ item.file.name}}({{item.file.size/1000000}} MB)
+            <mat-icon (click)="item.remove();onRemoveItem($event.target.parentElement.id)">delete</mat-icon>
+            
+                <label>
+                  Precio:
+                  <input type="text" required style="width:50px" (focusout)="onSetPrice($event.target.parentElement.parentElement.id,$event.target.value)">                  
+                </label>
+
+              <label>
+                Descripcion:
+                <input type="text" required style="width:50px" (focusout)="onSetDescription($event.target.parentElement.parentElement.id,$event.target.value)">
+              </label>
+   
+        </div>
+      </div>
+
+      </div>
+      <br>
+      <button mat-raised-button color="accent" [disabled]="!uploadForm.valid" type="submit">Upload Data</button>
+    </mat-card-content>
+  </form>
+</mat-card>
